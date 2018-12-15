@@ -49,16 +49,21 @@ export class GamePage {
     this.clickCount = Number(this.service.getClickCount());
     this.clickCount++
     this.service.setClickable(false).then(() => {
-      if(this.clickCount === 9){
-        this.disableGame();
-        this.service.saveClickCount(0);
-      } else{
-        this.service.updateClickCount(this.clickCount, this.key).then(() => {
-          setTimeout(() => {
-            this.service.setClickable(true);
-          }, 500)
-        });
-      }
+
+        if(this.clickCount < 10) {
+          this.service.updateClickCount(this.clickCount, this.key).then(() => {
+            if(this.clickCount === 9){
+              this.disableGame();
+              this.service.saveClickCount(0);
+            } else {
+              setTimeout(() => {
+                this.service.setClickable(true);
+              }, 500)
+            }
+          });
+        }
+
+
     });
   }
 

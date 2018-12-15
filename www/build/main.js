@@ -132,15 +132,17 @@ var GamePage = (function () {
         this.clickCount = Number(this.service.getClickCount());
         this.clickCount++;
         this.service.setClickable(false).then(function () {
-            if (_this.clickCount === 9) {
-                _this.disableGame();
-                _this.service.saveClickCount(0);
-            }
-            else {
+            if (_this.clickCount < 10) {
                 _this.service.updateClickCount(_this.clickCount, _this.key).then(function () {
-                    setTimeout(function () {
-                        _this.service.setClickable(true);
-                    }, 300);
+                    if (_this.clickCount === 9) {
+                        _this.disableGame();
+                        _this.service.saveClickCount(0);
+                    }
+                    else {
+                        setTimeout(function () {
+                            _this.service.setClickable(true);
+                        }, 500);
+                    }
                 });
             }
         });
