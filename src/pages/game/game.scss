@@ -1,0 +1,14 @@
+page-game {
+    .numero-clicks {
+        text-align: center;
+        font-size: 1000%;
+    }
+
+    .button[icon-only] {
+        height: 50%;
+    }
+
+    [icon-only] ion-icon {
+        font-size: 10.0em;
+    }
+}

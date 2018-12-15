@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
-import { Player } from './../models/Player';
+import { Player } from '../models/player';
 
 const CLICK_COUNT_KEY = "CLICK_COUNT_KEY";
 const USER_ID_KEY = "USER_ID_KEY";
@@ -25,16 +25,20 @@ export class Service {
     return this.db.database.ref(`${this.basePath}/${key}/clickCount`).set(clickCount);
   }
 
-  startGame(){
-    this.db.database.ref(`/enableGame`).set(true);
-  }
-
-  disableGame(){
-    this.db.database.ref(`/enableGame`).set(false);
+  setEnableGame(value: boolean){
+    this.db.database.ref(`/enableGame`).set(value);
   }
 
   getGamePIN(): AngularFireObject<number>{
     return this.db.object(`/enableGame`);
+  }
+
+  getClickable(): AngularFireObject<number>{
+    return this.db.object(`/clickable`);
+  }
+
+  setClickable(value: boolean) {
+    return this.db.database.ref(`/clickable`).set(value);
   }
 
   saveClickCount(value: number){
@@ -52,4 +56,9 @@ export class Service {
   getClickCount(): string{
     return localStorage.getItem(CLICK_COUNT_KEY);
   }
+
+  getRegisteredPlayersCount() {
+    return this.db.database.ref().child("realPlayers");
+  }
+ 
 }

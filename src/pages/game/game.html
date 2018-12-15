@@ -1,0 +1,25 @@
+<!--
+  Generated template for the GamePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>GAME</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div class="numero-clicks">{{clickCount}}</div>
+  <div class="numero-clicks" *ngIf="clickCount > 8" >Você ganhou!</div>
+
+  <button ion-button large full icon-only (click)="registerPlayerClick()"
+  [disabled]="!flagClickButton && !clickable">
+      <ion-icon name="car"></ion-icon>
+    </button>
+
+</ion-content>
