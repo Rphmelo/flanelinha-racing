@@ -51,11 +51,12 @@ export class GamePage {
     this.service.setClickable(false).then(() => {
       if(this.clickCount === 9){
         this.disableGame();
+        this.service.saveClickCount(0);
       } else{
         this.service.updateClickCount(this.clickCount, this.key).then(() => {
           setTimeout(() => {
             this.service.setClickable(true);
-          }, 300)
+          }, 500)
         });
       }
     });

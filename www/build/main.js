@@ -134,6 +134,7 @@ var GamePage = (function () {
         this.service.setClickable(false).then(function () {
             if (_this.clickCount === 9) {
                 _this.disableGame();
+                _this.service.saveClickCount(0);
             }
             else {
                 _this.service.updateClickCount(_this.clickCount, _this.key).then(function () {
