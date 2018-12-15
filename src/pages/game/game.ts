@@ -13,7 +13,7 @@ export class GamePage {
   clickable: boolean;
   key: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     private service: Service) {
   }
 
@@ -49,11 +49,15 @@ export class GamePage {
     this.clickCount = Number(this.service.getClickCount());
     this.clickCount++
     this.service.setClickable(false).then(() => {
-      this.service.updateClickCount(this.clickCount, this.key).then(() => {
-        setTimeout(() => {
-          this.service.setClickable(true);
-        }, 300)
-      });
+      if(this.clickCount === 9){
+        this.disableGame();
+      } else{
+        this.service.updateClickCount(this.clickCount, this.key).then(() => {
+          setTimeout(() => {
+            this.service.setClickable(true);
+          }, 300)
+        });
+      }
     });
   }
 
